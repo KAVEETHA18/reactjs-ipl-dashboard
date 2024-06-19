@@ -1,39 +1,21 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable react/no-array-index-key */
-import {
-  PieChart as PieChartComponent,
-  Pie,
-  Cell,
-  Legend,
-  Tooltip,
-} from 'recharts'
+// Write your code here
+import {Link} from 'react-router-dom'
 
 import './index.css'
 
-const COLORS = ['#00C49F', '#FF8042', '#FFBB28']
-
-const PieChart = props => {
-  const {data} = props
-
+const TeamCard = props => {
+  const {teamItem} = props
+  const {id, name, teamImageUrl} = teamItem
   return (
-    <div className="pie-chart-bg-container mt-2 d-flex justify-content-center">
-      <PieChartComponent width={400} height={350}>
-        <Pie
-          data={data}
-          innerRadius={0}
-          outerRadius={100}
-          dataKey="value"
-          label
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Tooltip />
-        <Legend verticalAlign="bottom" height={36} />
-      </PieChartComponent>
-    </div>
+    <li className="list-item">
+      <Link to={`/team-matches/${id}`} className="link">
+        <img src={teamImageUrl} className="image-url" alt={`${name}`} />
+        <div>
+          <p className="card-heading">{name}</p>
+        </div>
+      </Link>
+    </li>
   )
 }
 
-export default PieChart
+export default TeamCard
